@@ -95,11 +95,11 @@ class BusinessController extends Controller
     public function setup(){
         //check if user has a record
         $user = Auth::user();
-        if($user->setup === 0 ){
+        if(intval($user->setup) === 0 ){
             return view('dashboard.pages.business.create');
         }
 
-        if($user->setup === 1 ){
+        if(intval($user->setup) === 1 ){
             return redirect()->route('setup.business2');
         }
 
