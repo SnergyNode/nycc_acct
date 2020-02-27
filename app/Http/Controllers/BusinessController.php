@@ -125,7 +125,7 @@ class BusinessController extends Controller
 
     public function setBusType(){
         $user = Auth::user();
-        if($user->setup === 1 ){
+        if(intval($user->setup) === 1 ){
             $bus = Business::where('user_id', $user->unid)->first();
             if(empty($bus)){
                 return back()->withErrors(array('error'=>'Client Business Logic Missing'));

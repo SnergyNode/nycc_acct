@@ -4,6 +4,7 @@
 /public/admin/plugins
 /public/img
 /public/data
+/.idea
 /storage/*.key
 /vendor
 .env
