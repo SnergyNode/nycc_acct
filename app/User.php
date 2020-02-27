@@ -55,4 +55,8 @@ class User extends Authenticatable
     public function businessIndex(){
         return Business::where('user_id',$this->unid)->select(['id'])->get()->count();
     }
+
+    public function business(){
+        return $this->hasMany(Business::class, 'user_id', 'unid');
+    }
 }

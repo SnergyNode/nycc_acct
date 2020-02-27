@@ -29,7 +29,8 @@ class BusinessController extends Controller
         return view('dashboard.pages.business.create');
     }
 
-    public function mybusiness(){
+    public function mybusiness(Request $request){
+
         return view('dashboard.pages.business.mybusiness');
     }
 

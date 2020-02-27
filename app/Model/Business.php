@@ -15,4 +15,16 @@ class Business extends Model
         'unid',
         'active',
     ];
+
+    public function operation(){
+        return $this->hasOne(Operation::class, 'code_name', 'operation_code');
+    }
+
+    public function typeof(){
+        switch ($this->type){
+            case 'sole_proprietorship':
+                return 'Sole Proprietorship';
+                break;
+        }
+    }
 }
