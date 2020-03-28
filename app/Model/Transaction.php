@@ -51,8 +51,8 @@ class Transaction extends Model
         }
     }
 
-    public function info(){
-
+    public function business(){
+        return $this->hasOne(Business::class, 'unid', 'business_id');
     }
 
 

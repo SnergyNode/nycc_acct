@@ -9,6 +9,9 @@ class BoardController extends Controller
 {
     public function dashboard(){
         $activity = Transaction::where('active', true)->select(['id'])->get()->count();
-        return view('dashboard.pages.home.index')->with('activity', $activity);
+        $transactions = Transaction::where('active', true)->paginate(40);
+        return view('dashboard.pages.home.index')
+            ->with('transactions', $transactions)
+            ->with('activity', $activity);
     }
 }

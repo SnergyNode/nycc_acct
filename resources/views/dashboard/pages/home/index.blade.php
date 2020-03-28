@@ -17,54 +17,56 @@ $breadcrumb = [
             <!-- Info boxes -->
             @include('dashboard.pages.home.infobox')
             <!-- /.row -->
+            <div class="row mt-4">
+                <div class="col-12">
+                        <div class="card card-dark">
+                            <div class="card-header ">
+                                <h3 class="card-title">Recent Transactions</h3>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5 class="card-title">Report</h5>
+                                {{--@include('dashboard.pages.sale.search')--}}
 
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fas fa-wrench"></i>
-                                    </button>
-                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <a href="#" class="dropdown-item">Action</a>
-                                        <a href="#" class="dropdown-item">Another action</a>
-                                        <a href="#" class="dropdown-item">Something else here</a>
-                                        <a class="dropdown-divider"></a>
-                                        <a href="#" class="dropdown-item">Separated link</a>
-                                    </div>
-                                </div>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
                             </div>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-12" style="min-height: 200px">
-                                    <p class="text-center">
-                                        Sales Today: 0
-                                    </p>
+                            <!-- /.card-header -->
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover text-nowrap">
+                                    <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Business</th>
+                                        <th>Type</th>
+                                        <th>Amount</th>
+                                        <th>Reason</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @forelse($transactions as $trans)
+                                        <tr>
+                                            <td>{{ date('F d, Y', $trans->date) }}</td>
+                                            <td>{{ $trans->business->name }}</td>
+                                            <td>{{ $trans->type }}</td>
+                                            <td><span class="">{{ number_format($trans->value('amount')) }}</span></td>
+                                            <td>{{ $trans->value('details') }}</td>
+                                        </tr>
+                                    @empty
 
-                                    <!-- /.chart-responsive -->
-                                </div>
+                                        <tr>
+                                            <td colspan="3"><h5 class="text-center">No Records Found</h5></td>
+                                        </tr>
+                                    @endforelse
+
+
+                                    </tbody>
+                                </table>
                             </div>
-                            <!-- /.row -->
-                        </div>
 
+
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card -->
                 </div>
-                <!-- /.col -->
-            </div>
-            <!-- /.row -->
+
+            {{ $transactions->links() }}
 
 
         </div><!--/. container-fluid -->
