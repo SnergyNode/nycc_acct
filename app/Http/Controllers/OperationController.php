@@ -85,7 +85,7 @@ class OperationController extends Controller
 
     public function seed(){
         $seeds = [
-            'Trade'=>'Drug Store, Provision Store etc',
+            'Trade'=>'Drug Store, Trader, Provision Store etc',
             'Services'=>'Restaurant, Spa, Make-up Artists, Graphics Artists, Printing, Painting etc.',
             'Light Manufacturing'=>'Water Bottling, Wood Works, Metal Works, Food/Argo-Processing, Packaging etc',
         ];

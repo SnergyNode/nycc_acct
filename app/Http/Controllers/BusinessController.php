@@ -7,7 +7,7 @@ use App\Model\Operation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BusinessController extends Controller
+class BusinessController extends MyController
 {
     /**
      * Display a listing of the resource.
@@ -115,7 +115,7 @@ class BusinessController extends Controller
         $business->info = $request->input('info');
         $business->type = $request->input('type');
         $business->user_id = $user->unid;
-        $business->unid = uniqid('BUS', false);
+        $business->unid = $this->generateId('BUS', 20);
         $business->active = false;
         $business->save();
 

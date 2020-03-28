@@ -15,7 +15,7 @@ Route::group(['middleware'=>'access'], function () {
         Route::group(['middleware'=>'uncheck'], function (){
 
             Route::get('home', 'BoardController@dashboard')->name('dashboard');
-            Route::get('logout', 'AuthController@logout')->name('logout');
+
             Route::get('my-business', 'BusinessController@mybusiness')->name('mybusiness');
             Route::resource('business', 'BusinessController');
             Route::get('bus/make/current/{unid}', 'BusinessController@make_current')->name('make.bus.current');
@@ -38,6 +38,8 @@ Route::group(['middleware'=>'access'], function () {
         Route::get('setup/business_2', 'BusinessController@setBusType')->name('setup.business2');
 
         Route::get('complete/setup/business/{bus}/{operation}', 'BusinessController@saveBusType')->name('set.business2');
+
+        Route::get('logout', 'AuthController@logout')->name('logout');
 
     });
 });

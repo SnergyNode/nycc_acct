@@ -61,6 +61,7 @@ class PurchaseController extends MyController
         $transaction = new Transaction();
         $transaction->unid = $this->generateId('TR', 20);
         $transaction->business_id = $business_id;
+        $transaction->user_id = $user->unid;
         $transaction->date = $date;
         $transaction->type = 'purchases';
         $transaction->type_id = $purchase_unid;

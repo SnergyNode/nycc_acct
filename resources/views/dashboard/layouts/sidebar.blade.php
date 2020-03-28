@@ -60,6 +60,17 @@
                     </a>
                 </li>
 
+                <li class="nav-header">Reports</li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link {{ @$sidebar['reports'] }}">
+                        <i class="nav-icon fas fa-chart-line"></i>
+                        <p>
+                            Get Reports
+                        </p>
+                    </a>
+                </li>
+
             </ul>
         </nav>
         <!-- /.sidebar-menu -->
