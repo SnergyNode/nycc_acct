@@ -3,14 +3,14 @@
     <div class="col-12 col-sm-6 col-md-3">
         <div class="info-box mb-3">
             <span class="info-box-icon bg-danger elevation-1">
-                <a href="#">
-                    <i class="fas fa-shopping-cart"></i>
+                <a href="{{ route('activities') }}">
+                    <i class="fas fa-star"></i>
                 </a>
             </span>
 
             <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">0</span>
+                <span class="info-box-text"><a href="{{ route('activities') }}">Activities</a></span>
+                <span class="info-box-number">{{ $activity }}</span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -25,7 +25,7 @@
             </span>
 
             <div class="info-box-content">
-                <span class="info-box-text">My Business</span>
+                <span class="info-box-text"><a href="{{ route('mybusiness') }}">My Business</a></span>
                 <span class="info-box-number">
                   {{ $person->businessIndex() }}
                 </span>

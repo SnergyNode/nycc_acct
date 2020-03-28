@@ -27,4 +27,8 @@ class Business extends Model
                 break;
         }
     }
+
+    public function sales(){
+        return $this->hasMany(Sale::class, 'business_id', 'unid');
+    }
 }

@@ -13,6 +13,7 @@ $breadcrumb = [
 @section('content')
     <section class="content">
         <div class="container-fluid">
+            @include('layouts.notify')
             <!-- Info boxes -->
             @include('dashboard.pages.home.infobox')
             <!-- /.row -->

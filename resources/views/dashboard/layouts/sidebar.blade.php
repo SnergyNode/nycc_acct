@@ -43,10 +43,19 @@
                 <li class="nav-header">Activities</li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link {{ @$sidebar['post-sales'] }}">
+                    <a href="{{ route('activities') }}" class="nav-link {{ @$sidebar['activity'] }}">
+                        <i class="nav-icon fas fa-eye"></i>
+                        <p>
+                            Overview
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('new.activity') }}" class="nav-link {{ @$sidebar['new_activity'] }}">
                         <i class="nav-icon fas fa-plus"></i>
                         <p>
-                            Post Sales
+                            New Activity
                         </p>
                     </a>
                 </li>

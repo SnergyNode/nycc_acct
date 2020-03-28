@@ -18,8 +18,18 @@ Route::group(['middleware'=>'access'], function () {
             Route::get('logout', 'AuthController@logout')->name('logout');
             Route::get('my-business', 'BusinessController@mybusiness')->name('mybusiness');
             Route::resource('business', 'BusinessController');
+            Route::get('bus/make/current/{unid}', 'BusinessController@make_current')->name('make.bus.current');
+
+            Route::get('activity', 'ActivityController@options')->name('activities');
+            Route::get('new_activity', 'ActivityController@optionpage')->name('new.activity');
+            Route::resource('sales', 'SaleController');
+            Route::resource('purchase', 'PurchaseController');
+            Route::resource('expense', 'ExpenseController');
+            Route::get('transaction', 'TransactionController@index')->name('transaction');
 
         });
+
+        Route::get('request/new/business/start', 'BusinessController@newBusiness')->name('new.business');
 
         Route::get('setup/business', 'BusinessController@setup')->name('setup.business');
 

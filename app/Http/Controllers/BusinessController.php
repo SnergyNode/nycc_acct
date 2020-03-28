@@ -105,6 +105,8 @@ class BusinessController extends Controller
 
     }
 
+
+
     public function stepone(Request $request){
 
         $user = Auth::user();
@@ -152,6 +154,7 @@ class BusinessController extends Controller
         }
 
         $bus->active = true;
+        $bus->current = true;
         $bus->operation_code = $operation;
         $bus->update();
 
@@ -160,10 +163,27 @@ class BusinessController extends Controller
 
         return redirect()->route('dashboard');
 
+    }
 
+    public function make_current($unid){
+        if(!empty($unid)){
+            $bus = Business::whereUnid($unid)->first();
+            if(!empty($bus)){
+                $offset = Business::where('current', true)->first();
+                if(!empty($offset)){
+                    $offset->current = false;
+                    $offset->update();
+                }
+                $bus->current = true;
+                $bus->update();
+                return back()->withMessage("$bus->name is now set for transaction entries");
+            }
+        }
 
+        return back()->withMessage('Oops, not found');
+    }
 
-
-
+    public function newBusiness(){
+        return view('dashboard.pages.business.create');
     }
 }
