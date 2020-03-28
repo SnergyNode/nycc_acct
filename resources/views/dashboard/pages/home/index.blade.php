@@ -50,7 +50,7 @@ $breadcrumb = [
                                     @empty
 
                                         <tr>
-                                            <td colspan="3"><h5 class="text-center">No Records Found</h5></td>
+                                            <td colspan="5"><h5 class="text-center">No Records Found</h5></td>
                                         </tr>
                                     @endforelse
 
