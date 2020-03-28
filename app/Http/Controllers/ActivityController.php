@@ -11,11 +11,16 @@ use Illuminate\Http\Request;
 class ActivityController extends Controller
 {
     //
-    public function options(){
-        $sales = Sale::where('active', true)->select(['id'])->get()->count();
-        $purchase = Purchase::where('active', true)->select(['id'])->get()->count();
-        $expense = Expense::where('active', true)->select(['id'])->get()->count();
-        $trans = Transaction::where('active', true)->select(['id'])->get()->count();
+    public function options(Request $request){
+
+        $user = $request->user();
+        $activeBus = $user->business->where('user_id', $user->unid)->first();
+
+        $sales = Sale::where('active', true)->where('business_id', $activeBus->unid)->select(['id'])->get()->count();
+        $purchase = Purchase::where('active', true)->where('business_id', $activeBus->unid)->select(['id'])->get()->count();
+        $expense = Expense::where('active', true)->where('business_id', $activeBus->unid)->select(['id'])->get()->count();
+        $trans = Transaction::where('active', true)->where('business_id', $activeBus->unid)->select(['id'])->get()->count();
+
         return view('dashboard.pages.activity.index')
             ->with("sales", $sales)
             ->with("purchase", $purchase)

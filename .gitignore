@@ -4,7 +4,7 @@
 /public/admin/plugins
 /public/img
 /public/data
-/.idea
+/.idea/workspace.xml
 /storage/*.key
 /vendor
 .env
