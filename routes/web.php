@@ -8,6 +8,18 @@ Route::get('login', 'AuthController@login')->name('login');
 
 Route::post('client/login', 'AuthController@clientValidate')->name('client.login');
 
+/**
+ * PASSWORD RESET START
+ */
+Route::get('forgot/password', 'AuthController@mailReset')->name('cms_reset_password'); //page to reset password
+Route::post('/reset_password', 'AuthController@mailResetPass')->name('reset_user_password'); //page after sending mail
+
+Route::get('password/{email}/reset/{token}', 'AuthController@PasswordReset')->name('update.password');
+Route::post('/fix/lost/password/{unid}/{token}', 'AuthController@resetAccForgotPass')->name('reset.lost.pass');
+/**
+ * PASSWORD RESET END
+ */
+
 Route::group(['middleware'=>'access'], function () {
 
     Route::prefix('dashboard')->group(function () {

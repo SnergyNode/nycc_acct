@@ -15,4 +15,60 @@ class MyController extends Controller
         return $id;
 
     }
+
+    public function makeToken($val){
+        $token = "";
+        $codes = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $codes .= "-_";
+        $codes .= "abcdefghijklmnopqrstuvwxyz";
+        $codes .= "0123456789";
+        $max = strlen($codes);
+        for($i=0; $i < $val; $i++){
+            $token.= $codes[random_int(0, $max-1)];
+        }
+        return $token;
+    }
+
+    public function passwordResetMail($user){
+        $view = view('email.reset_password')
+            ->with("email", $user->email)
+            ->with("token", $user->token);
+
+        $this->sendMails($user->email, $view, 'Weavon Hair - Password Reset');
+    }
+
+    public function sendMails($mail, $htmlContent, $title){
+
+        $to = $mail;
+        $sender = "noreply@officenode.com";
+
+        $separator = md5(time());
+        $eol = "\r\n";
+
+        $subject = $title;
+
+        $fromMail = "Accounting NYCC <$sender>";
+
+        $headersMail = '';
+
+        $headersMail .= "Reply-To:" . $fromMail . "\r\n";
+        $headersMail .= "Return-Path: ". $fromMail ."\r\n";
+        $headersMail .= 'From: ' . $fromMail . "\r\n";
+        $headersMail .= "Organization: Office Node \r\n";
+
+        $headersMail .= 'MIME-Version: 1.0' . "\r\n";
+
+        $headersMail .= "X-Priority: 3\r\n";
+        $headersMail .= "X-Mailer: PHP". phpversion() ."\r\n" ;
+        $headersMail .=  "Content-Type: text/html; charset=ISO-8859-1; boundary=\"" . $separator . "\"" . $eol;
+//        $headersMail .= 'Content-Type: text/html; charset=ISO-8859-1' . "\r\n";
+
+        $headersMail .= 'Content-Transfer-Encoding: 7bit' . "\r\n";
+
+
+
+//        @mail($to,$subject, $htmlContent, $headersMail, $sender);
+        @mail($to,$subject,$htmlContent,$headersMail, "-f ". $sender);
+
+    }
 }
