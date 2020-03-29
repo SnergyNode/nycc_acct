@@ -34,13 +34,13 @@ class MyController extends Controller
             ->with("email", $user->email)
             ->with("token", $user->token);
 
-        $this->sendMails($user->email, $view, 'Weavon Hair - Password Reset');
+        $this->sendMails($user->email, $view, 'NYCC Account- Password Reset');
     }
 
     public function sendMails($mail, $htmlContent, $title){
 
         $to = $mail;
-        $sender = "noreply@officenode.com";
+        $sender = "noreply@digitalasusu.com";
 
         $separator = md5(time());
         $eol = "\r\n";
