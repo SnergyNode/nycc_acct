@@ -13,7 +13,7 @@ $isactive['login'] = 'active';
                     <div class="col-md-offset-2 col-md-8 text-center">
                         <div class="contact-from gray-bg">
 
-                            <h3 class="text-center mb-4">Login</h3>
+                            <h3 class="text-center mb-4">Update Your Password</h3>
                             <br>
                             @include('layouts.notify')
                             <form id="contact-form" action="{{ route('reset.lost.pass',[$user->unid, $user->reset_token]) }}" method="post">
