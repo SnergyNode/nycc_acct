@@ -32,7 +32,7 @@ class MyController extends Controller
     public function passwordResetMail($user){
         $view = view('email.reset_password')
             ->with("email", $user->email)
-            ->with("token", $user->token);
+            ->with("token", $user->reset_token);
 
         $this->sendMails($user->email, $view, 'NYCC Account- Password Reset');
     }
