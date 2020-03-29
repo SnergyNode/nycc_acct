@@ -16,7 +16,7 @@ $isactive['login'] = 'active';
                             <h3 class="text-center mb-4">Login</h3>
                             <br>
                             @include('layouts.notify')
-                            <form id="contact-form" action="{{ route('reset.lost.pass') }}" method="post">
+                            <form id="contact-form" action="{{ route('reset.lost.pass',[$user->unid, $user->reset_token]) }}" method="post">
                                 {{ csrf_field() }}
 
                                 <input name="password" type="password" placeholder="password" required>
