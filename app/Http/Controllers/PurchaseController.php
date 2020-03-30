@@ -25,8 +25,13 @@ class PurchaseController extends MyController
         return view('dashboard.pages.purchase.index')->with('purchases', $purchase);
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $user = $request->user();
+        $business = $user->business->where('active', true)->where('current', true)->first();
+        if(empty($business)){
+            return redirect()->route('new.activity')->withErrors(['error'=>'Set at least one business as current.']);
+        }
         return view('dashboard.pages.purchase.create');
     }
 
