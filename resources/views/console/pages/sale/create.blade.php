@@ -1,7 +1,7 @@
 <?php
 
 $sidebar['new_activity'] = 'active';
-$title = 'New Expense';
+$title = 'New Sale';
 $breadcrumb = [
     $title=>'',
     'Dashboard'=>route('dashboard')
@@ -24,11 +24,11 @@ $breadcrumb = [
                 <div class="col-md-6 col-sm-12">
                     <div class="card card-secondary">
                         <div class="card-header">
-                            <h3 class="card-title">New Expense Entry</h3>
+                            <h3 class="card-title">New Sale Entry</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form role="form" method="post" action="{{ route('expense.store') }}">
+                            <form role="form" method="post" action="{{ route('sales.store') }}">
                                 {{ csrf_field() }}
                                 <div class="card-body">
                                     <div class="form-group">
@@ -61,14 +61,14 @@ $breadcrumb = [
                     <div class="row">
                         <div class="col-12 col-sm-6 col-md-6">
                             <div class="info-box mb-3">
-                            <span class="info-box-icon bg-dark elevation-1">
-                                <a href="{{ route('expense.index') }}">
-                                    <i class="fas fa-money-bill-alt"></i>
+                            <span class="info-box-icon bg-danger elevation-1">
+                                <a href="{{ route('sales.index') }}">
+                                    <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </span>
 
                                 <div class="info-box-content">
-                                    <h5 class="info-box-text p-2"><a href="{{ route('expense.index') }}">View Expenses</a></h5>
+                                    <h5 class="info-box-text p-2"><a href="{{ route('sales.index') }}">View Sales</a></h5>
 
                                 </div>
                                 <!-- /.info-box-content -->

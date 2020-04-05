@@ -1,7 +1,7 @@
 <?php
 
 $sidebar['new_activity'] = 'active';
-$title = 'Purchase';
+$title = 'Transactions';
 $breadcrumb = [
     $title=>'',
     "Activity"=>route('activities'),
@@ -24,7 +24,7 @@ $breadcrumb = [
                 <div class="col-12">
                     <div class="card card-dark">
                         <div class="card-header ">
-                            <h3 class="card-title">Recent Purchases</h3>
+                            <h3 class="card-title">Recent Transactions</h3>
 
                             {{--@include('dashboard.pages.sale.search')--}}
 
@@ -35,21 +35,23 @@ $breadcrumb = [
                                 <thead>
                                 <tr>
                                     <th>Date</th>
+                                    <th>Type</th>
                                     <th>Amount</th>
-                                    <th>Narration</th>
+                                    <th>Reason</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @forelse($purchases as $purchase)
+                                @forelse($transactions as $trans)
                                     <tr>
-                                        <td>{{ date('F d, Y', $purchase->date) }}</td>
-                                        <td><span class="">{{ number_format($purchase->amount, 2) }}</span></td>
-                                        <td>{{ $purchase->details }}</td>
+                                        <td>{{ date('F d, Y', $trans->date) }}</td>
+                                        <td>{{ $trans->type }}</td>
+                                        <td><span class="">{{ number_format($trans->value('amount')) }}</span></td>
+                                        <td>{{ $trans->value('details') }}</td>
                                     </tr>
                                 @empty
 
                                     <tr>
-                                        <td colspan="3"><h5 class="text-center">No Records Found</h5></td>
+                                        <td colspan="4"><h5 class="text-center">No Records Found</h5></td>
                                     </tr>
                                 @endforelse
 
@@ -65,7 +67,7 @@ $breadcrumb = [
                 </div>
             </div>
 
-            {{ $purchases->links() }}
+            {{ $transactions->links() }}
 
             
 

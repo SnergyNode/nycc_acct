@@ -35,7 +35,7 @@ $breadcrumb = [
                                         <th>Business</th>
                                         <th>Type</th>
                                         <th>Amount</th>
-                                        <th>Reason</th>
+                                        <th>Narration</th>
                                     </tr>
                                     </thead>
                                     <tbody>

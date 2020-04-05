@@ -18,6 +18,10 @@ class AuthController extends MyController
         return view('pages.form.login');
     }
 
+    public function admin_login(){
+        return view('pages.form.admin_login');
+    }
+
     public function clientValidate(Request $request){
 //        return $request->all();
         $access = trim($request->input('access'));
@@ -41,9 +45,37 @@ class AuthController extends MyController
 
     }
 
-    public function logout(){
-        Auth::logout();
-        return redirect()->route('login')->withMessage('Logout Successful');
+    public function adminValidate(Request $request){
+//        return $request->all();
+        $access = trim($request->input('access'));
+        $password = trim($request->input('password'));
+
+        if(filter_var($access, FILTER_VALIDATE_EMAIL)){
+            if (Auth::guard('admin')->attempt(['email' => $access, 'password' => $password])) {
+                return redirect(route('console'));
+            }
+            else {
+                return back()->withErrors(array('access' => 'Invalid credentials given'));
+            }
+        }else{
+            if (Auth::guard('admin')->attempt(['username' => $access, 'password' => $password])) {
+                return redirect(route('console'));
+            }
+            else {
+                return back()->withErrors(array('access' => 'Invalid credentials given'));
+            }
+        }
+    }
+
+    public function logout(Request $request, $guard){
+
+        if($guard==='admin'){
+            auth($guard)->logout();
+            return redirect()->route('admin.login')->withMessage('Logout Successful');
+        }else{
+            Auth::logout();
+            return redirect()->route('login')->withMessage('Logout Successful');
+        }
     }
 
     public function mailReset(){

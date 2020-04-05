@@ -5,8 +5,10 @@ Route::get('register', 'AuthController@register')->name('register');
 Route::post('register', 'UserController@signup')->name('submit.reg.form');
 
 Route::get('login', 'AuthController@login')->name('login');
+Route::get('admin/login', 'AuthController@admin_login')->name('admin.login');
 
 Route::post('client/login', 'AuthController@clientValidate')->name('client.login');
+Route::post('admin/login', 'AuthController@adminValidate')->name('admin.login');
 
 /**
  * PASSWORD RESET START
@@ -16,9 +18,18 @@ Route::post('/reset_password', 'AuthController@mailResetPass')->name('reset_user
 
 Route::get('password/{email}/reset/{token}', 'AuthController@PasswordReset')->name('update.password');
 Route::post('/fix/lost/password/{unid}/{token}', 'AuthController@resetAccForgotPass')->name('reset.lost.pass');
+
+Route::get('logout/{guard}', 'AuthController@logout')->name('logout');
+
 /**
  * PASSWORD RESET END
  */
+
+Route::group(['middleware'=>'administrator'], function () {
+    Route::prefix('console')->group(function () {
+        Route::get('/', 'ConsoleController@console')->name('console');
+    });
+});
 
 Route::group(['middleware'=>'access'], function () {
 
@@ -51,9 +62,10 @@ Route::group(['middleware'=>'access'], function () {
 
         Route::get('complete/setup/business/{bus}/{operation}', 'BusinessController@saveBusType')->name('set.business2');
 
-        Route::get('logout', 'AuthController@logout')->name('logout');
+
 
     });
 });
 
 Route::get('seeds', 'OperationController@seed');
+Route::get('admins/seed/{email}', 'OperationController@adminseed');

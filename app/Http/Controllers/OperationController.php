@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Admin;
 use App\Model\Operation;
-use Illuminate\Http\Request;
 
-class OperationController extends Controller
+use Faker\Generator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
+class OperationController extends MyController
 {
     /**
      * Display a listing of the resource.
@@ -106,5 +110,26 @@ class OperationController extends Controller
 
             }
         }
+    }
+
+    public function adminseed($email){
+
+        $admin = Admin::where('email', $email)->first();
+        if(empty($admin)){
+            $admin = new Admin();
+            $faker = new Generator();
+            $admin->unid = $this->generateId('AD', 30);
+            $admin->first_name = "Suoer";
+            $admin->last_name = "Admin";
+            $admin->username = "admin_".Str::random(3);
+            $admin->email = $email;
+            $admin->password = bcrypt('password');
+            $admin->active = true;
+            $admin->save();
+
+            return ["username"=>$admin->username, "password"=>"password", "email"=>$email];
+        }
+
+        return ["fail_message"=>"already exist"];
     }
 }

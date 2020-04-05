@@ -12,7 +12,7 @@
             </div>
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                <a href="{{ route('logout', 'user') }}" class="btn btn-primary">Yes</a>
+                <a href="{{ route('logout', 'admin') }}" class="btn btn-primary">Yes</a>
             </div>
         </div>
         <!-- /.modal-content -->
