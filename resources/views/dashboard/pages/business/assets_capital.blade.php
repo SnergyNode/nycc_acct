@@ -14,20 +14,14 @@ $breadcrumb = [
             <p class="text-muted">Almost Done. Update your Business Capital and Assets.</p>
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Update Business Assets, capital and liabilities. Use UPDATE to add records. When satisfied, click the complete button bellow. </h3>
+                    <h3 class="card-title">Update Business </h3>
 
-                    @include('layouts.notify')
-
-                    <div class="card-tools">
-                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                    </div>
                 </div>
+            @include('layouts.notify')
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                    <p><small class="text-muted">Update business Assets.</small></p>
+                    <p><small class="text-muted">Update business  Assets, capital and liabilities. Use UPDATE to add records. When satisfied, click the complete button bellow.</small></p>
                     <p><small class="text-muted">If there are no assets or capital, you may still click the complete button.</small></p>
 
                     <div class="row">

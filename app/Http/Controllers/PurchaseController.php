@@ -90,7 +90,7 @@ class PurchaseController extends MyController
         if($purchase_type==="cash"){
             $cash = new Cash();
             $cash->unid = $this->generateId('Cs_',25);
-            $cash->date = time();
+            $cash->date = $date;
             $cash->amount = $amount;
             $cash->business_id = $business_id;
             $cash->trans_id = $trans_id;
@@ -101,7 +101,7 @@ class PurchaseController extends MyController
             //credit sale
             $credit = new Credit();
             $credit->unid = $this->generateId('Cd_', 25);
-            $credit->date = time();
+            $credit->date = $date;
             $credit->amount = $amount;
             $credit->business_id = $business_id;
             $credit->trans_id = $trans_id;
