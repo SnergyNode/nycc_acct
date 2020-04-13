@@ -1,6 +1,6 @@
 <?php
 
-$sidebar['new_activity'] = 'active';
+$sidebar['activity'] = 'active';
 $title = 'Expenses';
 $breadcrumb = [
     $title=>'',

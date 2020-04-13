@@ -60,4 +60,13 @@ class User extends Authenticatable
     public function business(){
         return $this->hasMany(Business::class, 'user_id', 'unid');
     }
+
+    public function currentBusiness(){
+        $name = "None Set";
+        $bus = $this->business->where('current', true)->first();
+        if(!empty($bus)){
+            $name = $bus->name;
+        }
+        return $name;
+    }
 }

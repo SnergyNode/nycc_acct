@@ -65,6 +65,41 @@ class Transaction extends Model
         return $this->hasOne(Business::class, 'unid', 'business_id');
     }
 
+    public function model(){
+        $model = null;
+        switch ($this->type){
+            case 'sales':
+                $type = '';
+                $model = Sale::class;
+                break;
+            case 'purchases':
+                $type = '';
+                $model = Purchase::class;
+                break;
+            case 'expenses':
+                $type = '';
+                $model = Expense::class;
+                break;
+            case 'asset':
+                $type = '';
+                $model = Asset::class;
+                break;
+            case 'capital':
+                $type = '';
+                $model = Capital::class;
+                break;
+            case 'liability':
+                $type = '';
+                $model = Liability::class;
+                break;
+            default:
+                $model = null;
+                break;
+        }
+
+        return $model::where('');
+    }
+
 
 
 }

@@ -46,6 +46,15 @@ class SaleController extends MyController
         }
         $amount = $request->input('amount');
         $sale_type = $request->input('type');
+
+        $creditVal = null;
+        if($sale_type==="cash and credit"){
+            if(empty($request->input('credit'))){
+                return back()->withErrors(['error'=>'Enter missing values for type : Cash and Credit.'])->withInput($request->input());
+            }else{
+                $creditVal = $request->input('credit');
+            }
+        }
         //check if amount is integer
         if(!is_numeric($amount)){
             return back()->withErrors(['error'=>'enter numerical values for amount.'])->withInput($request->input());
@@ -98,6 +107,29 @@ class SaleController extends MyController
             $cash->type = "sale";
             $cash->model_id = $sale_unid;
             $cash->save();
+        }elseif ($sale_type==="cash and credit"){
+
+            $cash = new Cash();
+            $cash->unid = $this->generateId('Cs_',25);
+            $cash->date = $date;
+            $cash->amount = floatval($amount) - floatval($creditVal);
+            $cash->business_id = $business_id;
+            $cash->trans_id = $trans_id;
+            $cash->type = "purchase";
+            $cash->model_id = $sale_unid;
+            $cash->save();
+
+            //credit sale
+            $credit = new Credit();
+            $credit->unid = $this->generateId('Cd_', 25);
+            $credit->date = $date;
+            $credit->amount = $creditVal;
+            $credit->business_id = $business_id;
+            $credit->trans_id = $trans_id;
+            $credit->type = "purchase";
+            $credit->model_id = $sale_unid;
+            $credit->save();
+
         }else{
             //credit sale
             $credit = new Credit();

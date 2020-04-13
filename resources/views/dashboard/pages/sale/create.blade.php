@@ -1,11 +1,12 @@
 <?php
 
-$sidebar['new_activity'] = 'active';
+$sidebar['activity'] = 'active';
 $title = 'New Sale';
 $breadcrumb = [
     $title=>'',
     'Dashboard'=>route('dashboard')
 ];
+$injectables = ['sale.script'];
 
 ?>
 
@@ -43,8 +44,14 @@ $breadcrumb = [
                                     <div class="form-group">
                                         <label for="activityValue" title="">* Type</label>
                                         <br>
-                                        <input type="radio" name="type" required value="cash" class="ml-1"> Cash Sale
-                                        <input type="radio" name="type" required value="credit" class="ml-4"> Credit Sale
+                                        <input type="radio" name="type" required value="cash" class="ml-1 fieldMon_others"> Cash Sale
+                                        <input type="radio" name="type" required value="credit" class="ml-4 fieldMon_others"> Credit Sale
+                                        <input type="radio" name="type" required value="cash and credit" class="ml-4 fieldMon_others"> Cash and Credit Sale
+
+                                        <div class="mt-1 otherField" style="display: none">
+                                            <small class="text-muted">Enter Credit Value</small>
+                                            <input type="text" class="form-control" name="credit" placeholder="Enter Credit Value Only" autocomplete="off" value="{{ old('others') }}" >
+                                        </div>
                                     </div>
 
                                     <div class="form-group">

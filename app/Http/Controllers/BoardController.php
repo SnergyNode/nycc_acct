@@ -12,7 +12,7 @@ class BoardController extends Controller
         $activeBus = $user->business->where('user_id', $user->unid)->first();
 
         $activity = Transaction::where('active', true)->where('user_id', $user->unid)->select(['id'])->get()->count();
-        $transactions = Transaction::where('active', true)->where('business_id', $activeBus->unid)->paginate(40);
+        $transactions = Transaction::orderBy('date', 'desc')->where('active', true)->where('business_id', $activeBus->unid)->paginate(40);
         return view('dashboard.pages.home.index')
             ->with('transactions', $transactions)
             ->with('activity', $activity);
