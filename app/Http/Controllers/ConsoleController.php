@@ -12,8 +12,8 @@ class ConsoleController extends Controller
     public function console(Request $request){
 
         $trans = Transaction::where('active', true)->select(['id'])->get()->count();
-        $users = User::where('active', true)->select(['id'])->get()->count();
-        $buss = Business::where('active', true)->select(['id'])->get()->count();
+        $users = User::select(['id'])->get()->count();
+        $buss = Business::select(['id'])->get()->count();
         return view('console.pages.home.index')
             ->with('trans', $trans)
             ->with('users', $users)
