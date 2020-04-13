@@ -17,7 +17,7 @@ class CreatePurchasesTable extends Migration
             $table->bigIncrements('id');
             $table->string('unid')->nullable();
             $table->bigInteger('date')->nullable();
-            $table->float('amount')->nullable();
+            $table->float('amount', 14, 2)->nullable();
             $table->boolean('active')->nullable();
             $table->string('type')->nullable();
             $table->string('business_id')->nullable();
