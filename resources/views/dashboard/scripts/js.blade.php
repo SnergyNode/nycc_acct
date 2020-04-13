@@ -22,3 +22,9 @@
 
 {{--<!-- PAGE SCRIPTS -->--}}
 {{--<script src="{{ asset('admin/js/dashboard2.js') }}"></script>--}}
+
+@if(!empty($injectables))
+    @foreach($injectables as $injectable)
+        @include('dashboard.pages.'.$injectable)
+    @endforeach
+@endif

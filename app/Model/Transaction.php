@@ -40,6 +40,15 @@ class Transaction extends Model
             case 'expenses':
                 $model = Expense::class;
                 break;
+            case 'asset':
+                $model = Asset::class;
+                break;
+            case 'capital':
+                $model = Capital::class;
+                break;
+            case 'liability':
+                $model = Liability::class;
+                break;
             default:
                 $model = null;
                 break;

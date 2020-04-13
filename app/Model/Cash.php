@@ -10,7 +10,9 @@ class Cash extends Model
         'unid',
         'date',
         'amount',
+        'type',
         'business_id',
         'trans_id',
+        'model_id',
     ];
 }

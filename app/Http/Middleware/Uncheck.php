@@ -18,7 +18,7 @@ class Uncheck
     {
 
         $user = Auth::user();
-        if(intval($user->setup) <= 1){
+        if(intval($user->setup) <= 2){
             return redirect()->route('setup.business');
         }else{
             return $next($request);

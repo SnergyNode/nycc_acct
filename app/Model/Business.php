@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Business extends Model
@@ -14,6 +15,7 @@ class Business extends Model
         'operation_code',
         'unid',
         'active',
+        'current',
     ];
 
     public function operation(){
@@ -30,5 +32,9 @@ class Business extends Model
 
     public function sales(){
         return $this->hasMany(Sale::class, 'business_id', 'unid');
+    }
+
+    public function user(){
+        return $this->hasOne(User::class, 'unid', 'user_id');
     }
 }

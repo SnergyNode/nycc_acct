@@ -48,11 +48,10 @@ $breadcrumb = [
 
 
 
-                                <div class="col-12">
+                                <div class="col-12 mt-3">
                                     <label for="">Brief Information on your business</label>
                                     <textarea name="info" id="" cols="30" rows="10" class="form-control"></textarea>
                                 </div>
-                            </div>
 
                         </div>
 

@@ -18,8 +18,10 @@ class CreateCashesTable extends Migration
             $table->string('unid')->nullable();
             $table->bigInteger('date')->nullable();
             $table->float('amount')->nullable();
+            $table->string('type')->nullable();
             $table->string('business_id')->nullable();
             $table->string('trans_id')->nullable();
+            $table->string('model_id')->nullable();
             $table->timestamps();
         });
     }

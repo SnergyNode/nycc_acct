@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Asset;
 use App\Model\Business;
+use App\Model\Capital;
+use App\Model\Liability;
 use App\Model\Operation;
+use App\Model\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,6 +107,10 @@ class BusinessController extends MyController
             return redirect()->route('setup.business2');
         }
 
+        if(intval($user->setup) === 2 ){
+            return redirect()->route('setup.business3');
+        }
+
     }
 
 
@@ -117,6 +125,7 @@ class BusinessController extends MyController
         $business->user_id = $user->unid;
         $business->unid = $this->generateId('BUS', 20);
         $business->active = false;
+        $business->current = true;
         $business->save();
 
         $user->setup = 1;
@@ -136,6 +145,31 @@ class BusinessController extends MyController
             return view('dashboard.pages.business.select_bus')
                 ->with('bus_id', $bus->unid)
                 ->with('operations', $operation);
+        }else{
+            return redirect()->route('dashboard');
+        }
+    }
+
+    public function setAC(){
+        $user = Auth::user();
+        if(intval($user->setup) === 2 ){
+            $bus = Business::where('user_id', $user->unid)->where('current', true)->first(); // try to get current business
+            if(empty($bus)){
+                $bus = Business::where('user_id', $user->unid)->first(); // try to get any available business
+                if(empty($bus)){
+                    return back()->withErrors(array('error'=>'Client Business Logic Missing'));
+                }
+            }
+
+            $assets = Asset::where('business_id', $bus->unid)->get();
+            $capitals = Capital::where('business_id', $bus->unid)->get();
+            $liabilities = Liability::where('business_id', $bus->unid)->get();
+
+            return view('dashboard.pages.business.assets_capital')
+                ->with('bus_id', $bus->unid)
+                ->with('assets', $assets)
+                ->with('liabilities', $liabilities)
+                ->with('capitals', $capitals);
         }else{
             return redirect()->route('dashboard');
         }
@@ -186,4 +220,112 @@ class BusinessController extends MyController
     public function newBusiness(){
         return view('dashboard.pages.business.create');
     }
+
+    public function assets_capital(Request $request, $bus_id){
+        //store assets or capital of a business
+        $type = $request->input('type');
+        $user = $request->user();
+
+        try{
+            if($type==="asset"){
+                $asset = new Asset();
+                $asset->unid = $this->generateId('As', 30);
+                $asset->name = $request->input('name');
+                $asset->date = time();
+                $asset->amount = $request->input('amount');
+                $asset->active = $request->input('active');
+                $asset->business_id = $bus_id;
+                $asset->details = $request->input('details');
+
+
+                $transaction = new Transaction();
+                $transaction->unid = $this->generateId('TR', 20);
+                $transaction->business_id = $bus_id;
+                $transaction->user_id = $user->unid;
+                $transaction->date = time();
+                $transaction->type = $type;
+                $transaction->type_id = $asset->unid;
+                $transaction->active = true;
+                $transaction->save();
+
+                $asset->trans_id = $transaction->unid;
+                $asset->save();
+
+            }elseif ($type==="capital"){
+                $capital = new Capital();
+
+                $capital->unid = $this->generateId('Ct', 30);
+                $capital->name = $request->input('name');
+                $capital->date = time();
+                $capital->amount = $request->input('amount');
+                $capital->active = $request->input('active');
+                $capital->business_id = $bus_id;
+                $capital->details = $request->input('details');
+
+
+                $transaction = new Transaction();
+                $transaction->unid = $this->generateId('TR', 20);
+                $transaction->business_id = $bus_id;
+                $transaction->user_id = $user->unid;
+                $transaction->date = time();
+                $transaction->type = $type;
+                $transaction->type_id = $capital->unid;
+                $transaction->active = true;
+                $transaction->save();
+
+                $capital->trans_id = $transaction->unid;
+                $capital->save();
+            }
+            elseif ($type==="liability"){
+                $liability = new Liability();
+
+                $liability->unid = $this->generateId('Lt', 30);
+                $liability->name = $request->input('name');
+                $liability->date = time();
+                $liability->amount = $request->input('amount');
+                $liability->active = $request->input('active');
+                $liability->business_id = $bus_id;
+                $liability->details = $request->input('details');
+
+
+                $transaction = new Transaction();
+                $transaction->unid = $this->generateId('TR', 20);
+                $transaction->business_id = $bus_id;
+                $transaction->user_id = $user->unid;
+                $transaction->date = time();
+                $transaction->type = $type;
+                $transaction->type_id = $liability->unid;
+                $transaction->active = true;
+                $transaction->save();
+
+                $liability->trans_id = $transaction->unid;
+                $liability->save();
+            }
+
+            else{
+                return back()->withErrors(['error'=>'Type not found'])->withInput($request->input());
+            }
+
+            return back()->withMessage(ucfirst($type)." added successfully");
+        }catch (\Exception $e){
+            return back()->withErrors(['error'=>'Ensure that the Value field contains only numbers | '.$e->getMessage()])->withInput($request->input());
+        }
+
+
+
+
+    }
+
+    public function completeSetup($bus_id){
+        $bus = Business::whereUnid($bus_id)->first();
+        if(!empty($bus)){
+            $user = $bus->user;
+            $user->setup = 3;
+            $user->update();
+            return redirect()->route('dashboard');
+        }
+
+        return back()->withErrors(['error'=>'Business not found']);
+    }
+
 }

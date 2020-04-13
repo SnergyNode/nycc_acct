@@ -43,7 +43,7 @@ $breadcrumb = [
                                         <tr>
                                             <td>{{ date('F d, Y', $trans->date) }}</td>
                                             <td>{{ $trans->business->name }}</td>
-                                            <td>{{ $trans->type }}</td>
+                                            <td>{{ ucfirst($trans->type) }}</td>
                                             <td><span class="">{{ number_format($trans->value('amount'), 2) }}</span></td>
                                             <td>{{ $trans->value('details') }}</td>
                                         </tr>

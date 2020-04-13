@@ -41,6 +41,13 @@ $breadcrumb = [
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="activityValue" title="">* Type</label>
+                                        <br>
+                                        <input type="radio" name="type" required value="cash" class="ml-1"> Cash Sale
+                                        <input type="radio" name="type" required value="credit" class="ml-4"> Credit Sale
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="activityInfo">Details <small class="text-muted">(optional)</small></label>
                                         <textarea type="text" class="form-control" id="activityInfo" placeholder="Amount" autocomplete="off" name="details"> {{ old('details') }}</textarea>
                                     </div>

@@ -4,20 +4,16 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Purchase extends Model
+class Liability extends Model
 {
     protected $fillable = [
-        'umid',
+        'unid',
+        'name',
         'date',
         'amount',
         'active',
         'business_id',
         'trans_id',
         'details',
-        'type',
     ];
-
-    public function transaction(){
-        return $this->hasOne(Transaction::class, 'unid', 'trans_id');
-    }
 }

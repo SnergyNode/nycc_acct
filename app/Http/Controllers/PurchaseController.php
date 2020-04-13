@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Cash;
+use App\Model\Credit;
 use App\Model\Purchase;
 use App\Model\Transaction;
 use Illuminate\Http\Request;
@@ -43,6 +45,7 @@ class PurchaseController extends MyController
             return back()->withErrors(['error'=>'Amount Required!'])->withInput($request->input());
         }
         $amount = $request->input('amount');
+        $purchase_type = $request->input('type');
         //check if amount is integer
         if(!is_numeric($amount)){
             return back()->withErrors(['error'=>'enter numerical values for amount.'])->withInput($request->input());
@@ -83,6 +86,29 @@ class PurchaseController extends MyController
         $purchase->trans_id = $trans_id;
         $purchase->details = $details;
         $purchase->save();
+
+        if($purchase_type==="cash"){
+            $cash = new Cash();
+            $cash->unid = $this->generateId('Cs_',25);
+            $cash->date = time();
+            $cash->amount = $amount;
+            $cash->business_id = $business_id;
+            $cash->trans_id = $trans_id;
+            $cash->type = "purchase";
+            $cash->model_id = $purchase_unid;
+            $cash->save();
+        }else{
+            //credit sale
+            $credit = new Credit();
+            $credit->unid = $this->generateId('Cd_', 25);
+            $credit->date = time();
+            $credit->amount = $amount;
+            $credit->business_id = $business_id;
+            $credit->trans_id = $trans_id;
+            $credit->type = "purchase";
+            $credit->model_id = $purchase_unid;
+            $credit->save();
+        }
 
         return back()->withMessage('Entry Saved');
     }

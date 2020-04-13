@@ -22,6 +22,8 @@ class CreateExpensesTable extends Migration
             $table->string('business_id')->nullable();
             $table->string('trans_id')->nullable();
             $table->string('category_id')->nullable();
+            $table->string('type')->nullable();
+            $table->string('other_title')->nullable();
             $table->string('details')->nullable();
             $table->timestamps();
         });

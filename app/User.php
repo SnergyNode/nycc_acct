@@ -24,6 +24,7 @@ class User extends Authenticatable
         'phone',
         'reset_exp',
         'reset_token',
+        'activation_token',
         'password',
         'who',
         'setup',

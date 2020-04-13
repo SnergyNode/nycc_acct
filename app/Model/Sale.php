@@ -14,6 +14,8 @@ class Sale extends Model
         'business_id',
         'trans_id',
         'details',
+        'type',
+
     ];
 
     public function transaction(){

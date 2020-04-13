@@ -43,7 +43,18 @@ class ExpenseController extends MyController
             return back()->withErrors(['error'=>'Amount Required!'])->withInput($request->input());
         }
         $amount = $request->input('amount');
+        $expense_type = $request->input('type');
+        $expense_other = "";
+        if($expense_type==="other"){
+            if(empty($request->input('other_title'))){
+                return back()->withErrors(['error'=>'Enter missing values for type : others.'])->withInput($request->input());
+            }else{
+                $expense_other = $request->input('other_title');
+            }
+        }
+
         //check if amount is integer
+
         if(!is_numeric($amount)){
             return back()->withErrors(['error'=>'enter numerical values for amount.'])->withInput($request->input());
         }
@@ -82,6 +93,8 @@ class ExpenseController extends MyController
         $expense->business_id = $business_id;
         $expense->trans_id = $trans_id;
         $expense->details = $details;
+        $expense->type = $expense_type;
+        $expense->other_title = $expense_other;
         $expense->save();
 
         return back()->withMessage('Entry Saved');

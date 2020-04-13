@@ -7,6 +7,7 @@ Route::post('register', 'UserController@signup')->name('submit.reg.form');
 Route::get('login', 'AuthController@login')->name('login');
 Route::get('admin/login', 'AuthController@admin_login')->name('admin.login');
 
+
 Route::post('client/login', 'AuthController@clientValidate')->name('client.login');
 Route::post('admin/login', 'AuthController@adminValidate')->name('admin.login');
 
@@ -23,6 +24,15 @@ Route::get('logout/{guard}', 'AuthController@logout')->name('logout');
 
 /**
  * PASSWORD RESET END
+ */
+
+/**
+ * ACTIVATE NEW ACCOUNT START
+ */
+Route::get('account/activate/{token}/token', 'UserController@activateMe')->name('activate.account');
+
+/**
+ * ACTIVATE NEW ACCOUNT END
  */
 
 Route::group(['middleware'=>'administrator'], function () {
@@ -57,8 +67,13 @@ Route::group(['middleware'=>'access'], function () {
         Route::get('setup/business', 'BusinessController@setup')->name('setup.business');
 
         Route::post('start/setup/business', 'BusinessController@stepone')->name('set.business1');
+        Route::post('business/include/assets_capital/{bus_id}', 'BusinessController@assets_capital')->name('update.assets_capital');
 
         Route::get('setup/business_2', 'BusinessController@setBusType')->name('setup.business2');
+
+        Route::get('setup/business_3', 'BusinessController@setAC')->name('setup.business3');
+
+        Route::get('setup/complete/{bus}', 'BusinessController@completeSetup')->name('complete.bus.setup');
 
         Route::get('complete/setup/business/{bus}/{operation}', 'BusinessController@saveBusType')->name('set.business2');
 

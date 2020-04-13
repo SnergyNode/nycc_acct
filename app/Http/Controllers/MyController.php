@@ -34,7 +34,14 @@ class MyController extends Controller
             ->with("email", $user->email)
             ->with("token", $user->reset_token);
 
-        $this->sendMails($user->email, $view, 'NYCC Account- Password Reset');
+        $this->sendMails($user->email, $view, 'Book Keeping - Password Reset');
+    }
+
+    public function mailNewUser($user){
+        $view = view('email.welcome')
+            ->with("user", $user);
+
+        $this->sendMails($user->email, $view, 'Welcome to Book Keeping');
     }
 
     public function sendMails($mail, $htmlContent, $title){
@@ -47,14 +54,14 @@ class MyController extends Controller
 
         $subject = $title;
 
-        $fromMail = "Accounting NYCC <$sender>";
+        $fromMail = "Book Keeping <$sender>";
 
         $headersMail = '';
 
         $headersMail .= "Reply-To:" . $fromMail . "\r\n";
         $headersMail .= "Return-Path: ". $fromMail ."\r\n";
         $headersMail .= 'From: ' . $fromMail . "\r\n";
-        $headersMail .= "Organization: Office Node \r\n";
+        $headersMail .= "Organization: Digital Asusu \r\n";
 
         $headersMail .= 'MIME-Version: 1.0' . "\r\n";
 

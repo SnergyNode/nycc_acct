@@ -16,8 +16,9 @@ class CreateCapitalsTable extends Migration
         Schema::create('capitals', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('unid')->nullable();
+            $table->string('name')->nullable();
             $table->bigInteger('date')->nullable();
-            $table->float('amount')->nullable();
+            $table->float('amount', 14, 2)->nullable();
             $table->boolean('active')->nullable();
             $table->string('business_id')->nullable();
             $table->string('trans_id')->nullable();

@@ -12,5 +12,7 @@ class Credit extends Model
         'amount',
         'business_id',
         'trans_id',
+        'type',
+        'model_id',
     ];
 }

@@ -36,6 +36,7 @@ $breadcrumb = [
                                 <tr>
                                     <th>Date</th>
                                     <th>Amount</th>
+                                    <th>Type</th>
                                     <th>Narration</th>
                                 </tr>
                                 </thead>
@@ -44,6 +45,7 @@ $breadcrumb = [
                                     <tr>
                                         <td>{{ date('F d, Y', $sale->date) }}</td>
                                         <td><span class="">{{ number_format($sale->amount, 2) }}</span></td>
+                                        <td>{{ $sale->type }}</td>
                                         <td>{{ $sale->details }}</td>
                                     </tr>
                                 @empty

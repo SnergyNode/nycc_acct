@@ -7,6 +7,8 @@ $breadcrumb = [
     'Dashboard'=>route('dashboard')
 ];
 
+$injectables = ['expense.script'];
+
 ?>
 
 @extends('dashboard.layouts.app')
@@ -38,6 +40,19 @@ $breadcrumb = [
                                     <div class="form-group">
                                         <label for="activityValue">* Amount</label>
                                         <input type="text" class="form-control" id="activityValue" name="amount" placeholder="Amount" autocomplete="off" value="{{ old('amount') }}" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="activityValue" title="">* Type</label>
+                                        <br>
+                                        <input type="radio" name="type" required value="paid" class="ml-1 fieldMon_others"> Paid
+                                        <input type="radio" name="type" required value="yet_to" class="ml-4 fieldMon_others"> Yet to Pay
+                                        <input type="radio" name="type" required value="paid_ad" class="ml-4 fieldMon_others"> Paid in Advance
+                                        <input type="radio" name="type" required value="other" class="ml-4 fieldMon_others"> Others
+
+                                        <div class="mt-1 otherField" style="display: none">
+                                            <input type="text" class="form-control" name="other" placeholder="Other Title" autocomplete="off" value="{{ old('others') }}" >
+                                        </div>
                                     </div>
 
                                     <div class="form-group">

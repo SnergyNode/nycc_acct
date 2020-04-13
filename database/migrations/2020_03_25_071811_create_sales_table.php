@@ -19,6 +19,7 @@ class CreateSalesTable extends Migration
             $table->bigInteger('date')->nullable();
             $table->float('amount')->nullable();
             $table->boolean('active')->nullable();
+            $table->string('type')->nullable();
             $table->string('business_id')->nullable();
             $table->string('trans_id')->nullable();
             $table->string('details')->nullable();

@@ -20,8 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('last_name')->nullable();
             $table->string('email')->unique();
             $table->string('phone')->nullable();
+            $table->string('phone_otp')->nullable();
+            $table->boolean('phone_valid')->nullable();
             $table->bigInteger('reset_exp')->nullable();
             $table->text('reset_token')->nullable();
+            $table->text('activation_token')->nullable();
             $table->string('password')->nullable();
             $table->integer('who')->nullable();
             $table->integer('setup')->nullable();

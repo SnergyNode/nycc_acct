@@ -1,5 +1,5 @@
 <?php
-$title = 'Create Business';
+$title = 'Setup Business';
 $breadcrumb = [
     'Home'=>route('dashboard'),
     'My Business'=>route('mybusiness'),
@@ -28,7 +28,7 @@ $breadcrumb = [
                 <!-- /.card-header -->
                 <div class="card-body">
 
-                    <small class="text-muted">Consider carefully before choosing an option. It is not reversible</small>
+                    <small class="text-muted">Consider carefully before choosing an option.</small>
                     <br>
                     <br>
                     <div class="row">
