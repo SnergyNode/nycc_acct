@@ -14,7 +14,7 @@ $breadcrumb = [
             <p class="text-muted">Almost Done. Update your Business Capital and Assets.</p>
             <div class="card">
                 <div class="card-header border-transparent">
-                    <h3 class="card-title">Update Business Capital and Assets</h3>
+                    <h3 class="card-title">Update Business Assets, capital and liabilities. Use UPDATE to add records. When satisfied, click the complete button bellow. </h3>
 
                     @include('layouts.notify')
 
