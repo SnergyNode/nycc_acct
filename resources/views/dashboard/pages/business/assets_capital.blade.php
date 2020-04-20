@@ -131,7 +131,7 @@ $breadcrumb = [
 
                                 <div class="form-group">
                                     <label for="">* Value (money value)</label>
-                                    <input class="form-control" type="text" placeholder="Value in money terms" name="amount" value="{{ old('amount') }}" autocomplete="off" required>
+                                    <input class="form-control" type="text" placeholder="Value in money terms (numbers)" onkeypress="return isNumberKey(event);" name="amount" value="{{ old('amount') }}" autocomplete="off" required>
                                 </div>
 
                                 <div class="form-group">

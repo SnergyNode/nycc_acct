@@ -38,8 +38,8 @@ $injectables = ['expense.script'];
                                         <input type="date" name="date" class="form-control" id="activityDate" placeholder="Select Date" value="{{ old('date') }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="activityValue">* Amount</label>
-                                        <input type="text" class="form-control" id="activityValue" name="amount" placeholder="Amount" autocomplete="off" value="{{ old('amount') }}" required>
+                                        <label for="activityValue">* Amount <small>(numbers)</small></label>
+                                        <input type="text" class="form-control" id="activityValue" onkeypress="return isNumberKey(event);" name="amount" placeholder="Amount" autocomplete="off" value="{{ old('amount') }}" required>
                                     </div>
 
                                     <div class="form-group">
